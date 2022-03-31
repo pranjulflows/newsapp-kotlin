@@ -31,7 +31,12 @@ android {
             buildConfigField(
                 "String",
                 "API_URL",
-                "\"http://suthar.softradixtechnologies.com/api/\""
+                "\"https://newsapi.org/v2/\""
+            )
+            buildConfigField(
+                "String",
+                "NewsApiKey",
+                "\"b0ec82719cb64c748f3249d846e170b4\""
             )
         }
 
@@ -39,7 +44,12 @@ android {
             buildConfigField(
                 "String",
                 "API_URL",
-                "\"http://suthar.softradixtechnologies.com/api/\""
+                "\"https://newsapi.org/v2/\""
+            )
+            buildConfigField(
+                "String",
+                "NewsApiKey",
+                "\"b0ec82719cb64c748f3249d846e170b4\""
             )
         }
     }
