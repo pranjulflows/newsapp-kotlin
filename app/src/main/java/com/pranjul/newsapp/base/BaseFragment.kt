@@ -1,4 +1,4 @@
-package com.softradix.newsapptask.base
+package com.pranjul.newsapp.base
 
 import android.os.Bundle
 import android.view.View

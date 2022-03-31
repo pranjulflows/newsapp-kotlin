@@ -1,8 +1,8 @@
-package com.softradix.newsapptask.ui.activities
+package com.pranjul.newsapp.ui.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.softradix.newsapptask.R
+import com.pranjul.newsapp.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -1,4 +1,4 @@
-package com.softradix.newsapptask
+package com.pranjul.newsapp
 
 import org.junit.Test
 
