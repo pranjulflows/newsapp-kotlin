@@ -1,7 +1,5 @@
-package com.macamps.kotlinflows.di
+package com.pranjul.newsapp.di
 
-import com.macamps.kotlinflows.data.network.ApiService
-import com.macamps.kotlinflows.BuildConfig
 import com.pranjul.newsapp.BuildConfig
 import com.pranjul.newsapp.data.ApiService
 import dagger.Module
