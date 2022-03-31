@@ -1,8 +1,8 @@
-package com.macamps.kotlinflows.di
+package com.pranjul.newsapp.di
 
-import com.macamps.kotlinflows.data.MainDbSource
-import com.macamps.kotlinflows.data.MainRepoDataSource
-import com.macamps.kotlinflows.data.MainRepository
+
+import com.pranjul.newsapp.data.NewsDataSource
+import com.pranjul.newsapp.repository.NewsRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -15,7 +15,7 @@ object RepositoryModule {
 
     @Provides
     @Singleton
-    fun provideMainRepository(mainRepoDataSource: MainRepoDataSource, mainDbSource: MainDbSource) =
-        MainRepository(mainRepoDataSource, mainDbSource)
+    fun provideMainRepository(mainRepoDataSource: NewsDataSource) =
+        NewsRepository(mainRepoDataSource)
 
 }

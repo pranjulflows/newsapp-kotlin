@@ -1,4 +1,4 @@
-package com.pranjul.newsapp.data
+package com.pranjul.newsapp.data.network
 
 import com.pranjul.newsapp.data.model.ApiResponse
 import retrofit2.Response

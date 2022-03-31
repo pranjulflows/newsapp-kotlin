@@ -1,7 +1,7 @@
 package com.pranjul.newsapp.di
 
 import com.pranjul.newsapp.BuildConfig
-import com.pranjul.newsapp.data.ApiService
+import com.pranjul.newsapp.data.network.ApiService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
