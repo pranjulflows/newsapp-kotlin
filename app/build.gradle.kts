@@ -5,6 +5,7 @@ plugins {
     id("dagger.hilt.android.plugin")
 }
 
+
 android {
     compileSdk = ConfigData.compileSdkVersion
 
