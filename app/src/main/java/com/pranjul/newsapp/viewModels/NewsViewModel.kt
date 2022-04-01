@@ -37,7 +37,7 @@ class NewsViewModel @Inject constructor(private val newsRepository: NewsReposito
     }
 
     companion object {
-        @BindingAdapter("references")
+        @BindingAdapter("articles")
         @JvmStatic
         fun RecyclerView.bindRecyclerView(data: ArrayList<Article>?) {
             val referencesAdapter = NewsListAdapter()
