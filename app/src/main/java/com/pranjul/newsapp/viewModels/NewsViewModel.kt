@@ -1,9 +1,11 @@
 package com.pranjul.newsapp.viewModels
 
+import android.util.Log
 import androidx.databinding.BindingAdapter
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.recyclerview.widget.RecyclerView
+import com.google.gson.Gson
 import com.pranjul.newsapp.adapter.NewsListAdapter
 import com.pranjul.newsapp.data.model.Article
 import com.pranjul.newsapp.repository.NewsRepository
@@ -27,9 +29,11 @@ class NewsViewModel @Inject constructor(private val newsRepository: NewsReposito
             newsRepository.getNewsList().onStart {
                 _isLoading.emit(true)
             }.catch {
+                Log.e("TAG", "getNewsList: ${it.localizedMessage}" )
                 _isLoading.emit(false)
             }.collect {
                 _isLoading.emit(false)
+                Log.e("TAG", "getNewsList: ${Gson().toJson(it)}", )
                 mutableflow.emit(it.data?.articles as ArrayList<Article>)
             }
 

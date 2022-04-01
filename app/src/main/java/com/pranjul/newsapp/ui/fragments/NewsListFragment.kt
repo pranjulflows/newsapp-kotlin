@@ -10,8 +10,10 @@ import androidx.fragment.app.viewModels
 import com.pranjul.newsapp.R
 import com.pranjul.newsapp.databinding.FragmentNewsListBinding
 import com.pranjul.newsapp.viewModels.NewsViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
 
+@AndroidEntryPoint
 class NewsListFragment : Fragment() {
 
     private lateinit var binding: FragmentNewsListBinding
