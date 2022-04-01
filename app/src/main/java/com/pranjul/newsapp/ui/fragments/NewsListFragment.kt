@@ -18,7 +18,6 @@ class NewsListFragment : Fragment() {
     private val viewModel by viewModels<NewsViewModel>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
     }
 
     override fun onCreateView(
@@ -26,9 +25,11 @@ class NewsListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         // Inflate the layout for this fragment
-        binding =
-            DataBindingUtil.inflate(layoutInflater, R.layout.fragment_news_list, container, false);
-        binding
+        binding = DataBindingUtil.inflate(layoutInflater, R.layout.fragment_news_list, container, false);
+        binding.lifecycleOwner = this
+        binding.viewModel = viewModel
+
+        viewModel.getNewsList()
         return binding.root
     }
 }

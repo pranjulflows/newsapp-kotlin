@@ -3,7 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Pranjul/Documents/NewsAppDemo/app/src/main/res/layout/activity_main.xml" value="0.35052083333333334" />
+        <entry key="..\:/Users/Pranjul/Documents/NewsAppDemo/app/src/main/res/layout/fragment_news_details.xml" value="0.35052083333333334" />
         <entry key="..\:/Users/Pranjul/Documents/NewsAppDemo/app/src/main/res/layout/fragment_news_list.xml" value="0.35052083333333334" />
+        <entry key="..\:/Users/Pranjul/Documents/NewsAppDemo/app/src/main/res/layout/item_news_layout.xml" value="0.35052083333333334" />
       </map>
     </option>
   </component>
