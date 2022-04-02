@@ -8,7 +8,6 @@ import com.pranjul.newsapp.data.model.Article
 import com.pranjul.newsapp.databinding.ItemNewsLayoutBinding
 
 class NewsListAdapter : RecyclerView.Adapter<NewsListAdapter.ViewHolder>() {
-    private lateinit var binding: ItemNewsLayoutBinding
     private var itemsList: ArrayList<Article>? = ArrayList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ViewHolder(

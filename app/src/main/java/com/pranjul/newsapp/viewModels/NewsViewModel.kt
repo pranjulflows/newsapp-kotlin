@@ -1,10 +1,13 @@
 package com.pranjul.newsapp.viewModels
 
 import android.util.Log
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.google.gson.Gson
 import com.pranjul.newsapp.adapter.NewsListAdapter
 import com.pranjul.newsapp.data.model.Article
@@ -12,6 +15,8 @@ import com.pranjul.newsapp.repository.NewsRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
+import java.util.*
 import javax.inject.Inject
 
 @HiltViewModel
@@ -20,7 +25,6 @@ class NewsViewModel @Inject constructor(private val newsRepository: NewsReposito
 
     private val mutableflow = MutableStateFlow<ArrayList<Article>>(arrayListOf())
     val articlesFlow: StateFlow<ArrayList<Article>> = mutableflow
-    private val error = MutableStateFlow("")
     private val _isLoading = MutableStateFlow(false)
     val isLoading: StateFlow<Boolean> = _isLoading
 
@@ -29,11 +33,10 @@ class NewsViewModel @Inject constructor(private val newsRepository: NewsReposito
             newsRepository.getNewsList().onStart {
                 _isLoading.emit(true)
             }.catch {
-                Log.e("TAG", "getNewsList: ${it.localizedMessage}" )
+                Log.e("TAG", "getNewsList: ${it.localizedMessage}")
                 _isLoading.emit(false)
             }.collect {
                 _isLoading.emit(false)
-                Log.e("TAG", "getNewsList: ${Gson().toJson(it)}", )
                 mutableflow.emit(it.data?.articles as ArrayList<Article>)
             }
 
@@ -50,6 +53,23 @@ class NewsViewModel @Inject constructor(private val newsRepository: NewsReposito
             }
             data.let { referencesAdapter.addItems(it) }
         }
+
+        @BindingAdapter("src:image")
+        @JvmStatic
+        fun ImageView.setImage(url: String) {
+            Glide.with(this).load(url).into(this)
+        }
+
+        @BindingAdapter("showDate")
+        @JvmStatic
+        fun TextView.setPublishedDate(publishedDate: String) {
+            val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.ENGLISH)
+            val outputFormat = SimpleDateFormat("dd-MM-yyyy HH:mm", Locale.ENGLISH)
+            val date: Date? = inputFormat.parse(publishedDate)
+            val formattedDate: String = outputFormat.format(date!!)
+            text = formattedDate
+        }
+
     }
 
 }
