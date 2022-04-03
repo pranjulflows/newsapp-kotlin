@@ -6,6 +6,7 @@ object Versions {
     const val constraintLayout = "2.1.3"
     const val coreKtx = "1.7.0"
     const val legacySupport = "1.0.0"
+    const val customTabs = "1.4.0"
     const val nav_version = "2.4.0"
     const val sdp = "1.0.6"
     const val lifecycle_extensions = "1.1.1"

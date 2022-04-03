@@ -1,14 +1,16 @@
 package com.pranjul.newsapp.viewModels
 
+import android.net.Uri
 import android.util.Log
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.browser.customtabs.CustomTabsIntent
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.databinding.BindingAdapter
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.google.gson.Gson
 import com.pranjul.newsapp.adapter.NewsListAdapter
 import com.pranjul.newsapp.data.model.Article
 import com.pranjul.newsapp.repository.NewsRepository
@@ -56,8 +58,8 @@ class NewsViewModel @Inject constructor(private val newsRepository: NewsReposito
 
         @BindingAdapter("src:image")
         @JvmStatic
-        fun ImageView.setImage(url: String) {
-            Glide.with(this).load(url).into(this)
+        fun ImageView.setImage(url: String?) {
+            url?.let { Glide.with(this).load(url).into(this) }
         }
 
         @BindingAdapter("showDate")
@@ -68,6 +70,17 @@ class NewsViewModel @Inject constructor(private val newsRepository: NewsReposito
             val date: Date? = inputFormat.parse(publishedDate)
             val formattedDate: String = outputFormat.format(date!!)
             text = formattedDate
+        }
+
+        @BindingAdapter("showNews")
+        @JvmStatic
+        fun ConstraintLayout.showNews(url: String) {
+            setOnClickListener {
+                val builder = CustomTabsIntent.Builder()
+                val customTabsIntent = builder.build()
+                customTabsIntent.launchUrl(it.context, Uri.parse(url))
+            }
+
         }
 
     }

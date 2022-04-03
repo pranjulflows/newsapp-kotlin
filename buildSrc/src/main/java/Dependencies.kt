@@ -27,6 +27,9 @@ object Dependency {
     val glide by lazy { "com.github.bumptech.glide:glide:${Versions.glide_version}" }
     val glideCompiler by lazy { "com.github.bumptech.glide:compiler:${Versions.glide_version}" }
 
+    // custom tabs
+    val browserForCustomTabs by lazy { "androidx.browser:browser:${Versions.customTabs}" }
+
     //responsive size
     val sdp by lazy { "com.intuit.sdp:sdp-android:${Versions.sdp}" }
 

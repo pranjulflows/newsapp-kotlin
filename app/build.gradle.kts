@@ -81,8 +81,12 @@ dependencies {
     implementation(Dependency.appCompat)
     implementation(Dependency.constraintLayout)
     implementation(Dependency.legacySupport)
+
     //responsive size
     implementation(Dependency.sdp)
+
+   // custom tabs
+    implementation(Dependency.browserForCustomTabs)
 
     //navigation component
     implementation(Dependency.navigationFragment)
