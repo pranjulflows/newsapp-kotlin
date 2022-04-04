@@ -15,7 +15,6 @@ object RepositoryModule {
 
     @Provides
     @Singleton
-    fun provideMainRepository(mainRepoDataSource: NewsDataSource) =
-        NewsRepository(mainRepoDataSource)
+    fun provideMainRepository(mainRepoDataSource: NewsDataSource) = NewsRepository(mainRepoDataSource)
 
 }

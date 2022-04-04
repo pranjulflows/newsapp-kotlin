@@ -7,9 +7,10 @@
 
         <variable
             name="viewModel"
-            type="com.pranjul.newsapp.viewModels.NewsViewModel" />
+            type="com.pranjul.newsapp.viewmodel.NewsViewModel" />
 
         <import type="android.view.View" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -26,6 +27,18 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/rv"
             app:layout_constraintTop_toTopOf="@+id/rv" />
+
+        <TextView
+            android:id="@+id/no_data_found_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/no_data"
+            android:textSize="@dimen/_16sdp"
+            android:visibility="@{(viewModel.articlesFlow.size()==0 &amp;&amp; !viewModel.isLoading()) ? View.VISIBLE : View.GONE , default=gone}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv"

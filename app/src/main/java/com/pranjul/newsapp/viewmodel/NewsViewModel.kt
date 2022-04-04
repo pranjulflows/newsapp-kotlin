@@ -1,19 +1,21 @@
-package com.pranjul.newsapp.viewModels
+package com.pranjul.newsapp.viewmodel
 
-import android.net.Uri
 import android.util.Log
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.browser.customtabs.CustomTabsIntent
-import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.pranjul.newsapp.R
 import com.pranjul.newsapp.adapter.NewsListAdapter
+import com.pranjul.newsapp.app.AppClass
 import com.pranjul.newsapp.data.model.Article
+import com.pranjul.newsapp.extension.Extensions.toast
 import com.pranjul.newsapp.repository.NewsRepository
+import com.pranjul.newsapp.utils.Utils.getConnectionType
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
@@ -25,24 +27,28 @@ import javax.inject.Inject
 class NewsViewModel @Inject constructor(private val newsRepository: NewsRepository) : ViewModel() {
 
 
-    private val mutableflow = MutableStateFlow<ArrayList<Article>>(arrayListOf())
-    val articlesFlow: StateFlow<ArrayList<Article>> = mutableflow
+    private val mutableFlow = MutableStateFlow<ArrayList<Article>>(arrayListOf())
+    val articlesFlow: StateFlow<ArrayList<Article>> = mutableFlow
     private val _isLoading = MutableStateFlow(false)
     val isLoading: StateFlow<Boolean> = _isLoading
 
     fun getNewsList() {
         viewModelScope.launch {
-            newsRepository.getNewsList().onStart {
-                _isLoading.emit(true)
-            }.catch {
-                Log.e("TAG", "getNewsList: ${it.localizedMessage}")
-                _isLoading.emit(false)
-            }.collect {
-                _isLoading.emit(false)
-                mutableflow.emit(it.data?.articles as ArrayList<Article>)
-            }
+            if (getConnectionType() != 0) {
+                newsRepository.getNewsList().onStart {
+                    _isLoading.emit(true)
+                }.catch {
+                    Log.e("TAG", "getNewsList: ${it.localizedMessage}")
+                    _isLoading.emit(false)
+                }.collect {
+                    _isLoading.emit(false)
+                    mutableFlow.emit(it.data?.articles as ArrayList<Article>)
+                }
+            } else AppClass.instance.toast(AppClass.instance.getString(R.string.no_internet_msg))
+
 
         }
+
     }
 
     companion object {
@@ -50,16 +56,21 @@ class NewsViewModel @Inject constructor(private val newsRepository: NewsReposito
         @JvmStatic
         fun RecyclerView.bindRecyclerView(data: ArrayList<Article>?) {
             val referencesAdapter = NewsListAdapter()
-            this.apply {
-                adapter = referencesAdapter
-            }
+
+            apply { adapter = referencesAdapter }
+
             data.let { referencesAdapter.addItems(it) }
         }
 
         @BindingAdapter("src:image")
         @JvmStatic
         fun ImageView.setImage(url: String?) {
-            url?.let { Glide.with(this).load(url).into(this) }
+
+
+            url?.let {
+                Glide.with(this).load(url)
+                    .error(ContextCompat.getDrawable(context, R.drawable.placeholder)).into(this)
+            }
         }
 
         @BindingAdapter("showDate")
@@ -72,16 +83,6 @@ class NewsViewModel @Inject constructor(private val newsRepository: NewsReposito
             text = formattedDate
         }
 
-        @BindingAdapter("showNews")
-        @JvmStatic
-        fun ConstraintLayout.showNews(url: String) {
-            setOnClickListener {
-                val builder = CustomTabsIntent.Builder()
-                val customTabsIntent = builder.build()
-                customTabsIntent.launchUrl(it.context, Uri.parse(url))
-            }
-
-        }
 
     }
 

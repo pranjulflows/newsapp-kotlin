@@ -24,9 +24,11 @@ class NewsListAdapter : RecyclerView.Adapter<NewsListAdapter.ViewHolder>() {
 
     }
 
-    class ViewHolder(var binding: ItemNewsLayoutBinding) : RecyclerView.ViewHolder(binding.root) {
+    class ViewHolder(private var binding: ItemNewsLayoutBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(article: Article) {
             binding.setVariable(BR.article, article)
+            binding.executePendingBindings()
+
             binding.root.setOnClickListener {
                 val builder = CustomTabsIntent.Builder()
                 val customTabsIntent = builder.build()
@@ -37,6 +39,7 @@ class NewsListAdapter : RecyclerView.Adapter<NewsListAdapter.ViewHolder>() {
 
     override fun getItemViewType(position: Int) = position
     override fun getItemId(position: Int) = position.toLong()
+
     override fun getItemCount() = itemsList?.size ?: 0
     fun addItems(itemList: ArrayList<Article>?) {
 //        if (itemList == null) itemsList = ArrayList()
