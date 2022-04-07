@@ -19,6 +19,12 @@ object Dependency {
     val legacySupport by lazy { "androidx.legacy:legacy-support-v4:${Versions.legacySupport}" }
     val constraintLayout by lazy { "androidx.constraintlayout:constraintlayout:${Versions.constraintLayout}" }
 
+
+    val roomDb by lazy { "androidx.room:room-runtime:${Versions.room}" }
+    val roomCompiler by lazy { "androidx.room:room-compiler:${Versions.room}" }
+    val roomKtx by lazy { "androidx.room:room-ktx:${Versions.room}" }
+
+
     //navigation component
     val navigationUi by lazy { "androidx.navigation:navigation-ui-ktx:${Versions.nav_version}" }
     val navigationFragment by lazy { "androidx.navigation:navigation-fragment-ktx:${Versions.nav_version}" }

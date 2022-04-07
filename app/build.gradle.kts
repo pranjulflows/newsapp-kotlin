@@ -10,7 +10,7 @@ android {
     compileSdk = ConfigData.compileSdkVersion
 
     defaultConfig {
-        applicationId = "com.pranjul.newsapp"
+        applicationId = "com.devhook.iapapp.com"
         minSdk = ConfigData.minSdkVersion
         targetSdk = ConfigData.targetSdkVersion
         versionCode = ConfigData.versionCode
@@ -77,6 +77,11 @@ android {
 }
 
 dependencies {
+    implementation("com.github.DevnagriAI:dota-sdk-android:1.0.5@aar")
+    implementation(Dependency.roomDb)
+    implementation(Dependency.roomKtx)
+    kapt(Dependency.roomCompiler)
+
     implementation(Dependency.androidxCore)
     implementation(Dependency.appCompat)
     implementation(Dependency.constraintLayout)

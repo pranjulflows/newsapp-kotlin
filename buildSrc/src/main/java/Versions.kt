@@ -4,6 +4,7 @@ object Versions {
     const val kotlinGradlePlugin = "1.6.10"
     const val appCompat = "1.4.1"
     const val constraintLayout = "2.1.3"
+    const val room = "2.4.2"
     const val coreKtx = "1.7.0"
     const val legacySupport = "1.0.0"
     const val customTabs = "1.4.0"
